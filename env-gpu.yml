@@ -22,7 +22,7 @@ dependencies:
   - jupyter
   - mlflow == 1.23*
   - pytorch-lightning == 1.5.9
-  - cudatoolkit == 10.2
+  - cudatoolkit == 10.2*
   - tqdm
   - autopep8
   - pip:
