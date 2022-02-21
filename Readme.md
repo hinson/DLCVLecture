@@ -166,8 +166,9 @@ cat ~/.ssh/id_rsa.pub     # copy the entire output
 3. Login to a remote GPU server
 
 ```bash
-ssh {username}:{server IP}     # replace the placeholders
+ssh {username}@{server IP}     # replace the placeholders
 ```
+
 Input your password. Input `yes` if the machine ask for your confirmation.
 
 If you want to change the password, use
