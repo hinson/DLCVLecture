@@ -1,0 +1,30 @@
+name: dlcvl
+
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+
+dependencies:
+  - pillow == 8*
+  - opencv
+  - python == 3.9*
+  - pytorch == 1.10*
+  - matplotlib
+  - pandas
+  - scipy
+  - numpy
+  - scikit-learn
+  - scikit-image
+  - torchvision == 0.11*
+  - torchmetrics
+  - tensorboard == 2*
+  - jupyter
+  - mlflow == 1.23*
+  - pytorch-lightning == 1.5.9
+  - cudatoolkit == 10.2
+  - tqdm
+  - autopep8
+  - pip:
+      - timm
+      - einops
