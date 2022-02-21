@@ -45,6 +45,7 @@ You need to reboot your computer during the installation.
 
 
 4. Install packages in Ubuntu
+
 Right click mouse to paste contents in WSL.
 
 ```bash
@@ -53,7 +54,7 @@ sudo apt-get install wget ca-certificates curl
 ```
 
 
-5. Install pyenv in Ubuntu
+1. Install pyenv in Ubuntu
 
 ```bash
 curl https://pyenv.run | bash
