@@ -270,7 +270,7 @@ See [this](https://code.visualstudio.com/docs/datascience/jupyter-notebooks) for
 
 1. From `VSCode Explorer`, open `DLCVLecture/notebooks/test.ipynb`
 2. Click `Select Kernel` in the upper right corner
-3. Select the one with `(Remote) Jupyter Kernel`
+3. Select the one with `/home/{username}/...(Remote)...`
 4. Click the right Play button or use `shift` + `enter` to execute the code in the first cell.
 
 ### 3.5 Close remote Jupyter
