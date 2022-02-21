@@ -183,7 +183,7 @@ passwd
 4. Paste the public key to the remote server
 
 ```bash
-vim ~/.ssh/authorized_keys
+mkdir -p ~/.ssh && vim ~/.ssh/authorized_keys
 ```
 
 Paste the copied content to the end of the file and save (press `shift` + `g`, press `o`, paste, press `esc`, input `:wq`).
