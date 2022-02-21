@@ -24,7 +24,7 @@
 
 #### 1.1.1. Windows 
 
-1. Install [VSCode](https://code.visualstudio.com/download) from Microsoft Store
+1. Install [VSCode](https://code.visualstudio.com/download)
 
 2. Install VSCode extensions from PowerShell
 
