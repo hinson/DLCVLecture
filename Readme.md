@@ -189,7 +189,7 @@ Paste the copied content to the end of the file and save (press `shift` + `g`, p
 
 ```bash
 exit
-ssh {username}:{remote IP}
+ssh {username}@{remote IP}
 ```
 
 If the server does not ask for a password, then all is well.
