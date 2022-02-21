@@ -247,7 +247,7 @@ Open this url in your browser.
 ### 3.1. Open the workspace
 
 1. From menu,  `File` -> `Open Workspace from File`, select `{your home}/Projects/DLCVLecture/DLCVLecture.code-workspace`
-2. Check if the project files are shown in `VSCode Explorer` on the right.
+2. Check if the project files are shown in `VSCode Explorer` on the left.
 
 ### 3.2. Test local Python
 
