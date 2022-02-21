@@ -71,7 +71,6 @@ echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
 exec $SHELL
 ```
 
-
 #### 1.1.2. MacOS 
 
 1. Lauch Terminal
@@ -218,6 +217,7 @@ cd DLCVLecture
 ```
 
 7. Setup
+
 ```bash
 pyenv install mambaforge
 pyenv local mambaforge
@@ -232,14 +232,15 @@ jupyter notebook --no-browser --ip={server IP} --port={your port}
 ```
 
 The output will be like this:
+
 ```bash
 ...
 http://{server IP}:{your port}/?token={your token}
 ...
 ```
+
 Open this url in your browser.
 `{your token}` will change every time you lanch jupyter.
-
 
 ## 3. Set up VSCode
 
