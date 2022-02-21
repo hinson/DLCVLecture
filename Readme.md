@@ -36,7 +36,7 @@ code --install-extension ms-toolsai.jupyter-renderers
 code --install-extension ms-vscode-remote.vscode-remote-extensionpack
 ```
 
-3. Install [WSL(Ubuntu)](https://docs.microsoft.com/en-us/windows/wsl/setup/environment) from a adminstrator PowerShell
+3. Install [WSL(Ubuntu)](https://docs.microsoft.com/en-us/windows/wsl/setup/environment) from an adminstrator PowerShell
 
 ```bash
 wsl --install
