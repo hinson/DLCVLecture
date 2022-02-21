@@ -53,8 +53,7 @@ sudo apt-get update
 sudo apt-get install wget ca-certificates curl
 ```
 
-
-1. Install pyenv in Ubuntu
+5. Install pyenv in Ubuntu
 
 ```bash
 curl https://pyenv.run | bash
