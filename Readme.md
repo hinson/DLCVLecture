@@ -41,7 +41,8 @@ code --install-extension ms-vscode-remote.vscode-remote-extensionpack
 ```bash
 wsl --install
 ```
-You need to reboot your computer during the installation.
+
+You need to reboot your computer during the installation, and then set a username and password for WSL.
 
 
 4. Install packages in Ubuntu
@@ -52,6 +53,8 @@ Right click mouse to paste contents in WSL.
 sudo apt-get update
 sudo apt-get install wget ca-certificates curl
 ```
+
+You would be asked for a passowrd.
 
 5. Install pyenv in Ubuntu
 
@@ -189,7 +192,7 @@ Paste the copied content to the end of the file and save (press `shift` + `g`, p
 
 ```bash
 exit
-ssh {username}@{remote IP}
+ssh {username}@{server IP}
 ```
 
 If the server does not ask for a password, then all is well.
