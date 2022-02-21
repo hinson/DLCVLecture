@@ -22,7 +22,7 @@
 
 ### 1.1. Prerequisites
 
-#### 1.1.1. Windows 
+#### 1.1.1. Windows
 
 1. Install [VSCode](https://code.visualstudio.com/download)
 
@@ -35,7 +35,6 @@ code --install-extension ms-toolsai.jupyter
 code --install-extension ms-toolsai.jupyter-renderers
 code --install-extension ms-vscode-remote.vscode-remote-extensionpack
 ```
-
 
 3. Install [WSL(Ubuntu)](https://docs.microsoft.com/en-us/windows/wsl/setup/environment) from a adminstrator PowerShell
 
@@ -225,7 +224,7 @@ conda activate dlcvl
 8. Launch a Jupyter server
 
 ```bash
-jupyter notebook --browser=no --ip={server IP} --port={your port}
+jupyter notebook --no-browser --ip={server IP} --port={your port}
 ```
 
 The output will be like this:
