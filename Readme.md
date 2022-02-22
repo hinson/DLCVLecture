@@ -15,7 +15,6 @@
     - [3.2. Test local Python](#32-test-local-python)
     - [3.3. Set up remote Jupyter](#33-set-up-remote-jupyter)
     - [3.4. Test remote Jupyter](#34-test-remote-jupyter)
-    - [3.5 Close remote Jupyter](#35-close-remote-jupyter)
 
 
 ## 1. Set up a local development environment
@@ -273,6 +272,4 @@ See [this](https://code.visualstudio.com/docs/datascience/jupyter-notebooks) for
 3. Select the one with `/home/{username}/...(Remote)...`
 4. Click the right Play button or use `shift` + `enter` to execute the code in the first cell.
 
-### 3.5 Close remote Jupyter
-
-Press `ctrl` + `c` in the remote session.
+If you want to close remote Jupyter, press `ctrl` + `c` in the remote session.
