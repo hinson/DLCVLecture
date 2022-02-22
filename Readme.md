@@ -190,7 +190,7 @@ Paste the copied content to the end of the file and save (press `shift` + `g`, p
 
 ```bash
 exit
-ssh {username}@{server IP}
+ssh {username}@{server IP}    #
 ```
 
 If the server does not ask for a password, then all is well.
@@ -207,12 +207,12 @@ exec $SHELL
 
 ```bash
 mkdir -p ~/Projects
-cd ~/Projects
+cd ~/Projects     #
 ```
 
 ```bash
 git clone https://github.com/hinson/DLCVLecture
-cd DLCVLecture
+cd DLCVLecture    #
 ```
 
 7. Setup
@@ -221,13 +221,13 @@ cd DLCVLecture
 pyenv install mambaforge
 pyenv local mambaforge
 mamba env create -f env-gpu.yml
-conda activate dlcvl
+conda activate dlcvl      #
 ```
 
 8. Launch a Jupyter server
 
 ```bash
-jupyter notebook --no-browser --ip={server IP} --port={your port}
+jupyter notebook --no-browser --ip={server IP} --port={your port}     #
 ```
 
 The output will be like this:
@@ -240,6 +240,8 @@ http://{server IP}:{your port}/?token={your token}
 
 Open this url in your browser.
 `{your token}` will change every time you lanch jupyter.
+
+The above commands with `#` are required every time you re-login to the remote server.
 
 ## 3. Set up VSCode
 
