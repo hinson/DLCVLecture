@@ -37,11 +37,11 @@ def main():
 
     hparam_grid = {
         'feat_out1': [8, 16],
-        'feat_out2': [16, 32],
+        'feat_out2': [16],  # [16, 32],
         'feat_out3': [8, 16],
-        # 'clf_hid': [32, 64],
-        # 'feat_lr': [1e-2, 5e-3],
-        # 'clf_lr': [1e-2, 1e-3],
+        'clf_hid': [32],  # [32, 64],
+        'feat_lr': [1e-2],  # [1e-2, 5e-3],
+        'clf_lr': [1e-3],  # [1e-2, 1e-3],
         'batch_size': [32, 64]
     }
     grid_search(args, hparam_grid)
