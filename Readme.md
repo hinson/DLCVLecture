@@ -323,7 +323,7 @@ Follow [2.2](#22-afterwards-login-to-the-remote-project) to login to the remote 
 
 ```bash
 cd python/example
-mlflow ui --backend-store-uri sqlite:///mlflow.db --port {your port}
+mlflow ui --backend-store-uri sqlite:///mlflow.db --host 0.0.0.0 --port {your port} 
 ```
 
 There will be a new `sqlite` db file `mlflow.db` to store experimental data in `~/Projects/DLCVLecture/python/example`. If you want to use other databases, see [this](https://www.mlflow.org/docs/latest/tracking.html).
