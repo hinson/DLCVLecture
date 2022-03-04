@@ -60,16 +60,17 @@ def make_reproducible(args):
     torch.use_deterministic_algorithms(True)
     
 
-def train_evaluation(mlrun, args, hparams, log_samples=False):
+def train_evaluation(args, hparams, 
+                     default_root_dir=None, 
+                     mcp_dirpath=None, 
+                     log_samples=False):
 
     model = MNISTClassifier(**hparams)
     dm = MNISTDataModule(args.data_root, 
                          val_batch_size=args.val_batch_size, **hparams)
     
-    artifact_path = mlrun.info.artifact_uri
-    
     mcp_callback = ModelCheckpoint(
-        dirpath=artifact_path+'/checkpoints',
+        dirpath=mcp_dirpath+'/checkpoints',
         filename='{epoch}-{val_loss:.4f}-{val_acc:.4f}',
         save_top_k=1, monitor="val_loss", mode="min",
         save_weights_only=True
@@ -77,7 +78,7 @@ def train_evaluation(mlrun, args, hparams, log_samples=False):
     
     trainer = pl.Trainer.from_argparse_args(
         args, 
-        default_root_dir=artifact_path, 
+        default_root_dir=default_root_dir, 
         callbacks=[mcp_callback],
         gpus=str(hash(os.getlogin()) % 4) if torch.cuda.is_available() else None,
         strategy="dp"  # see https://pytorch-lightning.readthedocs.io/en/latest/common/trainer.html?highlight=strategy#strategy
@@ -116,8 +117,12 @@ def main():
     del hparams["data_root"]
     del hparams["val_batch_size"]
 
-    with mlflow.start_run() as mlrun:
-        train_evaluation(mlrun, args, hparams, log_samples=True)
+    with mlflow.start_run() as run:
+        artifact_path = run.info.artifact_uri
+        train_evaluation(run, args, hparams,
+                         default_root_dir=artifact_path,
+                         mcp_dirpath=artifact_path,
+                         log_samples=True)
         
 
 if __name__ == "__main__":

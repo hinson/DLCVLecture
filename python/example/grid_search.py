@@ -11,7 +11,8 @@ def grid_search(args, hparam_grid):
     best_hparams = None
     best_metric = 0
 
-    with mlflow.start_run(run_name="Parent"):
+    with mlflow.start_run(run_name="Parent") as parent_run:
+        parent_artifact_path = parent_run.info.artifact_uri
 
         for key, hparams in hparam_grid.items():
             mlflow.set_tag(key, hparams)    # log grid
@@ -19,7 +20,12 @@ def grid_search(args, hparam_grid):
         for i, hparams in enumerate(hparam_groups):
             with mlflow.start_run(nested=True, run_name=f"Trial {i}") as child_run:
 
-                hp_metric = train_evaluation(child_run, args, hparams)
+                child_artifact_path = child_run.info.artifact_uri
+
+                hp_metric = train_evaluation(
+                    child_run, args, hparams,
+                    default_root_dir=parent_artifact_path,
+                    mcp_dirpath=child_artifact_path)
 
                 # select the best hparams
                 if hp_metric > best_metric:
