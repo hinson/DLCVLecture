@@ -25,7 +25,7 @@
     - [5.3. Run experiments](#53-run-experiments)
   - [6. Tensorboard](#6-tensorboard)
   - [7. Load trained weights](#7-load-trained-weights)
-    - [7.1 `pl.LightningModule`](#71-pllightningmodule)
+    - [7.1. `pl.LightningModule`](#71-pllightningmodule)
     - [7.2. from `pl.LightningModule` to `torch.nn.Module`](#72-from-pllightningmodule-to-torchnnmodule)
 
 ## 1. Set up a local development environment
@@ -378,7 +378,7 @@ Then visit `{server IP}:{your port}` in a browser.
 
 ## 7. Load trained weights
 
-### 7.1 `pl.LightningModule`
+### 7.1. `pl.LightningModule`
 
 ```python
 model = MNISTClassifier.load_from_checkpoint({some pl. checkpoint path})
