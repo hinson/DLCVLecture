@@ -1,0 +1,26 @@
+name: MNIST Example
+
+conda_env: ../../env-gpu.yml
+
+entry_points:
+  main:
+    parameters:
+      max_epochs: { type: int, default: 3 }
+      batch_size: { type: int, default: 64 }
+
+    command: |
+      python train.py \
+        # --data_root '~/Datasets/' \
+        --data_root '/data/ssd/torchvision/' \
+        --max_epochs {max_epochs} \
+        --batch_size {batch_size}
+
+  grid:
+    parameters:
+      max_epochs: { type: int, default: 3 }
+
+    command: |
+      python grid_search.py \
+        # --data_root ~/Datasets \
+        --data_root '/data/ssd/torchvision/' \
+        --max_epochs {max_epochs}
