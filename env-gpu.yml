@@ -27,4 +27,5 @@ dependencies:
   - autopep8
   - pip:
       - timm
+      - albumentations
       - einops
