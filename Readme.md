@@ -25,7 +25,6 @@
     - [5.3. Run experiments](#53-run-experiments)
   - [6. Tensorboard](#6-tensorboard)
 
-
 ## 1. Set up a local development environment
 
 ### 1.1. Prerequisites
@@ -36,127 +35,128 @@
 
 2. Install VSCode extensions from PowerShell
 
-```bash
-code --install-extension ms-python.python
-code --install-extension ms-python.vscode-pylance
-code --install-extension ms-toolsai.jupyter
-code --install-extension ms-toolsai.jupyter-renderers
-code --install-extension ms-vscode-remote.vscode-remote-extensionpack
-```
+    ```bash
+    code --install-extension ms-python.python
+    code --install-extension ms-python.vscode-pylance
+    code --install-extension ms-toolsai.jupyter
+    code --install-extension ms-toolsai.jupyter-renderers
+    code --install-extension ms-vscode-remote.vscode-remote-extensionpack
+    ```
 
 3. Install [WSL(Ubuntu)](https://docs.microsoft.com/en-us/windows/wsl/setup/environment) from an adminstrator PowerShell
 
-```bash
-wsl --install
-```
+    ```bash
+    wsl --install
+    ```
 
-You need to reboot your computer during the installation, and then set a username and password for WSL.
-
+    You need to reboot your computer during the installation, and then set a username and password for WSL.
 
 4. Install packages in Ubuntu
 
-Right click mouse to paste contents in WSL.
+    Right click mouse to paste contents in WSL.
 
-```bash
-sudo apt-get update
-sudo apt-get install wget ca-certificates curl
-```
+    ```bash
+    sudo apt-get update
+    sudo apt-get install wget ca-certificates curl
+    ```
 
-You would be asked for a passowrd.
+    You would be asked for a passowrd.
 
 5. Install pyenv in Ubuntu
 
-```bash
-curl https://pyenv.run | bash
-```
+    ```bash
+    curl https://pyenv.run | bash
+    ```
 
 6. Add environment variables
 
-```bash
-echo 'export PATH="$HOME/.pyenv/bin:$PATH"' >> ~/.bashrc
-echo 'eval "$(pyenv init -)"' >> ~/.bashrc
-echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
-exec $SHELL
-```
+    ```bash
+    echo 'export PATH="$HOME/.pyenv/bin:$PATH"' >> ~/.bashrc
+    echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+    echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
+    exec $SHELL
+    ```
 
-#### 1.1.2. MacOS 
+#### 1.1.2. MacOS
 
 1. Lauch Terminal
 2. Install [Homebrew](https://brew.sh/)
 
-```bash
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
+    ```bash
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    ```
 
 3. Install packages
 
-```bash
-brew install wget git pyenv pyenv-virtualenv
-```
+    ```bash
+    brew install wget git pyenv pyenv-virtualenv
+    ```
 
 4. Add environment variables
 
-```bash
-echo 'eval "$(pyenv init --path)"' >> ~/.zprofile
-echo 'eval "$(pyenv init -)"' >> ~/.zprofile
-echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.zprofile
-exec $SHELL
-```
+    ```bash
+    echo 'eval "$(pyenv init --path)"' >> ~/.zprofile
+    echo 'eval "$(pyenv init -)"' >> ~/.zprofile
+    echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.zprofile
+    exec $SHELL
+    ```
 
-If your MacOS < 10.15, replace `.zprofile` with `.bash_profile`.
-
+    If your MacOS < 10.15, replace `.zprofile` with `.bash_profile`.
 
 5. Install VSCode and extensions.
 
-```bash
-brew install --cask visual-studio-code
-code --install-extension ms-python.python
-code --install-extension ms-python.vscode-pylance
-code --install-extension ms-toolsai.jupyter
-code --install-extension ms-toolsai.jupyter-renderers
-code --install-extension ms-vscode-remote.vscode-remote-extensionpack
-```
+    ```bash
+    brew install --cask visual-studio-code
+    code --install-extension ms-python.python
+    code --install-extension ms-python.vscode-pylance
+    code --install-extension ms-toolsai.jupyter
+    code --install-extension ms-toolsai.jupyter-renderers
+    code --install-extension ms-vscode-remote.vscode-remote-extensionpack
+    ```
 
 ### 1.2. Set up the local environment
 
 1. Create the project folder
 
-```bash
-mkdir -p ~/Projects
-cd ~/Projects
-```
+    ```bash
+    mkdir -p ~/Projects
+    cd ~/Projects
+    ```
 
 2. Clone the lecture project
-```bash
-git clone https://github.com/hinson/DLCVLecture
-cd DLCVLecture
-```
+
+    ```bash
+    git clone https://github.com/hinson/DLCVLecture
+    cd DLCVLecture
+    ```
 
 3. Create the python environment
-```bash
-pyenv install mambaforge
-pyenv local mambaforge
-mamba env create -f env-cpu.yml
-```
+
+    ```bash
+    pyenv install mambaforge
+    pyenv local mambaforge
+    mamba env create -f env-cpu.yml
+    ```
 
 4. Activate the python environment (named `dlcvl`)
-   
-```bash
-conda activate dlcvl
-```
 
-If you want to deactivate, use
+    ```bash
+    conda activate dlcvl
+    ```
 
-```bash
-conda deactivate
-```
+    If you want to deactivate, use
+
+    ```bash
+    conda deactivate
+    ```
 
 5. Open the project with VSCode
 
-```bash
-code DLCVLecture.code-workspace
-```
-Please trust the author😊
+    ```bash
+    code DLCVLecture.code-workspace
+    ```
+
+    Please trust the author😊
 
 ## 2. Set up a remote development environment
 
@@ -164,94 +164,94 @@ Please trust the author😊
 
 1. Create your RSA key pair from an adminstrator PowerShell in Windows or Terminal in MacOS
 
-```bash
-ssh-keygen
-```
-Press `enter` if you are prompted.
+    ```bash
+    ssh-keygen
+    ```
+
+    Press `enter` if you are prompted.
 
 2. Copy your public key
 
-```bash
-cat ~/.ssh/id_rsa.pub     # copy the entire output
-```
+    ```bash
+    cat ~/.ssh/id_rsa.pub     # copy the entire output
+    ```
 
 3. Login to a remote GPU server
 
-```bash
-ssh {username}@{server IP}     # replace the placeholders
-```
+    ```bash
+    ssh {username}@{server IP}     # replace the placeholders
+    ```
 
-Input your password. Input `yes` if the machine ask for your confirmation.
+    Input your password. Input `yes` if the machine ask for your confirmation.
 
-If you want to change the password, use
+    If you want to change the password, use
 
-```bash
-passwd
-```
+    ```bash
+    passwd
+    ```
 
 4. Paste the public key to the remote server
 
-```bash
-mkdir -p ~/.ssh && vim ~/.ssh/authorized_keys
-```
+    ```bash
+    mkdir -p ~/.ssh && vim ~/.ssh/authorized_keys
+    ```
 
-Paste the copied content to the end of the file and save (press `shift` + `g`, press `o`, paste, press `esc`, input `:wq`).
+    Paste the copied content to the end of the file and save (press `shift` + `g`, press `o`, paste, press `esc`, input `:wq`).
 
 5. Login the remote server without password
 
-```bash
-exit
-ssh {username}@{server IP}    #
-```
+    ```bash
+    exit
+    ssh {username}@{server IP}    #
+    ```
 
-If the server does not ask for a password, then all is well.
+    If the server does not ask for a password, then all is well.
 
 6. Set up the project
 
-```bash
-curl https://pyenv.run | bash
-echo 'export PATH="$HOME/.pyenv/bin:$PATH"' >> ~/.bashrc
-echo 'eval "$(pyenv init -)"' >> ~/.bashrc
-echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
-exec $SHELL
-```
+    ```bash
+    curl https://pyenv.run | bash
+    echo 'export PATH="$HOME/.pyenv/bin:$PATH"' >> ~/.bashrc
+    echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+    echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
+    exec $SHELL
+    ```
 
-```bash
-mkdir -p ~/Projects
-cd ~/Projects     #
-```
+    ```bash
+    mkdir -p ~/Projects
+    cd ~/Projects     #
+    ```
 
-```bash
-git clone https://github.com/hinson/DLCVLecture
-cd DLCVLecture    #
-```
+    ```bash
+    git clone https://github.com/hinson/DLCVLecture
+    cd DLCVLecture    #
+    ```
 
 7. Setup
 
-```bash
-pyenv install mambaforge
-pyenv local mambaforge
-mamba env create -f env-gpu.yml
-conda activate dlcvl      #
-```
+    ```bash
+    pyenv install mambaforge
+    pyenv local mambaforge
+    mamba env create -f env-gpu.yml
+    conda activate dlcvl      #
+    ```
 
 8. Launch a Jupyter server
 
-```bash
-jupyter notebook --no-browser --ip={server IP} --port={your port}     #
-```
+    ```bash
+    jupyter notebook --no-browser --ip={server IP} --port={your port}     #
+    ```
 
-The output will be like this:
+    The output will be like this:
 
-```bash
-...
-http://{server IP}:{your port}/?token={your token}
-...
-```
+    ```bash
+    ...
+    http://{server IP}:{your port}/?token={your token}
+    ...
+    ```
 
-Open this url in your browser.
-`{your token}` will change every time you lanch jupyter.
-
+    Open this url in your browser.
+    `{your token}` will change every time you lanch jupyter.
 
 ### 2.2 Afterwards (login to the remote project)
 
@@ -329,8 +329,8 @@ There will be a new `sqlite` db file `mlflow.db` to store experimental data in `
 
 Then visit `{server IP}:{your port}` in a browser.
 
-
 ### 5.2. Tracking URI
+
 Open a new terminal and repeat [2.2](#22-afterwards-login-to-the-remote-project), then
 
 ```bash
@@ -359,13 +359,11 @@ According to the `MLproject` file, we can set `max_epochs` and `batch_size`:
 mlflow run . --no-conda --experiment-name MNIST -P max_epochs=5 -P batch_size=128  
 ```
 
-
 - To run the `grid search` entry point:
 
 ```bash
 mlflow run . --no-conda --experiment-name MNIST_gs -e grid
 ```
-
 
 ## 6. Tensorboard
 
