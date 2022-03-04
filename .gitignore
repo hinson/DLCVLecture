@@ -1,3 +1,4 @@
+**/.DS_Store
 /.python-version
 **/.ipynb_checkpoints
 /test
@@ -6,4 +7,4 @@
 **/*logs
 **/checkpoints
 **/*.db
-**/.DS_Store
+
