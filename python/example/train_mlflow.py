@@ -7,6 +7,7 @@ import numpy as np
 import pytorch_lightning as pl
 from pytorch_lightning.callbacks import ModelCheckpoint
 import torch
+from torchvision.utils import make_grid
 
 from datamodules import MNISTDataModule
 from models import MNISTClassifier
@@ -59,7 +60,7 @@ def init_experiment(args):
     torch.use_deterministic_algorithms(True)
     
 
-def train_evaluation(mlrun, args, hparams):
+def train_evaluation(mlrun, args, hparams, log_samples=False):
 
     model = MNISTClassifier(**hparams)
     dm = MNISTDataModule(args.data_root, 
@@ -89,8 +90,22 @@ def train_evaluation(mlrun, args, hparams):
     trainer.test(datamodule=dm)
     test_acc = trainer.callback_metrics.get("test_acc")
     
+    if log_samples:
+        mlflow_log_samples(dm)
+    
     return float(test_acc)
 
+
+def mlflow_log_samples(dm):
+
+    data_iter = iter(dm.train_dataloader())
+    input, _ = data_iter.next()
+
+    img = make_grid(input, nrow=8)
+    img = img * dm.std + dm.mean
+    npimg = img.numpy()
+    mlflow.log_image(npimg.transpose((1, 2, 0)),  
+                     "samples.png")
 
 def main():
     args = parse_args()
@@ -101,7 +116,7 @@ def main():
     del hparams["val_batch_size"]
 
     with mlflow.start_run() as mlrun:
-        train_evaluation(mlrun, args, hparams)
+        train_evaluation(mlrun, args, hparams, log_samples=True)
         
 
 if __name__ == "__main__":

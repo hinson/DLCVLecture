@@ -14,15 +14,19 @@ class MNISTDataModule(pl.LightningDataModule):
         self.batch_size = batch_size
         self.val_batch_size = val_batch_size
 
+        self.mean = 0.1307
+        self.std = 0.3081
+        normalization = transforms.Normalize((self.mean,), (self.std,))
+
         self.transform = transforms.Compose([
             transforms.ToTensor(),
             transforms.RandomRotation(5),
-            transforms.Normalize((0.1307,), (0.3081,)),
+            normalization
         ])
 
         self.test_transform = transforms.Compose([
             transforms.ToTensor(),
-            transforms.Normalize((0.1307,), (0.3081,)),
+            normalization
         ])
 
     def prepare_data(self):
