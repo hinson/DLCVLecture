@@ -23,7 +23,7 @@ def grid_search(args, hparam_grid):
                 child_artifact_path = child_run.info.artifact_uri
 
                 hp_metric = train_evaluation(
-                    child_run, args, hparams,
+                    args, hparams,
                     root_dir=parent_artifact_path,
                     ckpt_dir=child_artifact_path)
 
