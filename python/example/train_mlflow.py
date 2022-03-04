@@ -50,7 +50,7 @@ def parse_args():
     return args
 
 
-def init_experiment(args):
+def make_reproducible(args):
     """
     For reproducibility, see https://pytorch.org/docs/stable/notes/randomness.html
     """
@@ -110,7 +110,7 @@ def mlflow_log_samples(dm):
 
 def main():
     args = parse_args()
-    init_experiment(args)
+    make_reproducible(args)
     
     hparams = dict(args.__dict__)
     del hparams["data_root"]

@@ -1,7 +1,7 @@
 import mlflow.pytorch
 from sklearn.model_selection import ParameterGrid
 
-from train_mlflow import parse_args, init_experiment, train_evaluation
+from train_mlflow import make_reproducible, parse_args, train_evaluation
 
 
 def grid_search(args, hparam_grid):
@@ -33,17 +33,17 @@ def grid_search(args, hparam_grid):
 
 def main():
     args = parse_args()
-    init_experiment(args)
+    make_reproducible(args)
 
     hparam_grid = {
         'feat_out1': [8, 16],
-        'feat_out2': [16],
+        'feat_out2': [16, 32],
         'feat_out3': [8, 16],
-        'clf_hid': [32, 64],
-        'feat_lr': [1e-2],
-        'clf_lr': [1e-2, 1e-3],
+        # 'clf_hid': [32, 64],
+        # 'feat_lr': [1e-2, 5e-3],
+        # 'clf_lr': [1e-2, 1e-3],
         'batch_size': [32, 64]
-    }   # 32 trails
+    }
     grid_search(args, hparam_grid)
 
 
