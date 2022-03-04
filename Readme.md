@@ -24,6 +24,9 @@
     - [5.2. Tracking URI](#52-tracking-uri)
     - [5.3. Run experiments](#53-run-experiments)
   - [6. Tensorboard](#6-tensorboard)
+  - [7. Load trained weights](#7-load-trained-weights)
+    - [7.1 `pl.LightningModule`](#71-pllightningmodule)
+    - [7.2. from `pl.LightningModule` to `torch.nn.Module`](#72-from-pllightningmodule-to-torchnnmodule)
 
 ## 1. Set up a local development environment
 
@@ -285,7 +288,7 @@ conda activate dlcvl
 3. Select `Existing`
 4. Paste the above jupyter url and press `enter`
 
-See [this](https://code.visualstudio.com/docs/datascience/jupyter-notebooks) for more details.
+See [Jupyter Notebooks in VS Code](https://code.visualstudio.com/docs/datascience/jupyter-notebooks) for more details.
 
 ### 3.4. Test remote Jupyter
 
@@ -325,7 +328,7 @@ cd python/example
 mlflow ui --backend-store-uri sqlite:///mlflow.db --host 0.0.0.0 --port {your port} 
 ```
 
-There will be a new `sqlite` db file `mlflow.db` to store experimental data in `~/Projects/DLCVLecture/python/example`. If you want to use other databases, see [this](https://www.mlflow.org/docs/latest/tracking.html).
+There will be a new `sqlite` db file `mlflow.db` to store experimental data in `~/Projects/DLCVLecture/python/example`. If you want to use other databases, see [MLflow Tracking](https://www.mlflow.org/docs/latest/tracking.html).
 
 Then visit `{server IP}:{your port}` in a browser.
 
@@ -372,3 +375,28 @@ tensorboard --host 0.0.0.0 --port {your port} --logdir {lightning log path}
 ```
 
 Then visit `{server IP}:{your port}` in a browser.
+
+
+## 7. Load trained weights
+
+### 7.1 `pl.LightningModule`
+
+```python
+model = MNISTClassifier.load_from_checkpoint({some pl. checkpoint path})
+```
+
+See [Saveing and Loading Weights (Lightning)](https://pytorch-lightning.readthedocs.io/en/stable/common/weights_loading.html) for details.
+
+### 7.2. from `pl.LightningModule` to `torch.nn.Module`
+
+Because `pl.LightningModule` is a subclass of `torch.nn.Module`, you can also load a state dict saved by `pl.LightningModule` to a `torch.nn.Module` model when they _have the same layer definitions_.
+
+For example, you can use the `CNN` class defined in `notebook/process` 3.1:
+
+```python
+model = CNN()
+cp = torch.load({some pl. checkpoint path})
+model.load_state_dict(cp["state_dict"])
+```
+
+More about `state dict`, see [Saving and Loading Models (PyTorch)](https://pytorch.org/tutorials/beginner/saving_loading_models.html)
