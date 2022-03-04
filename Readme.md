@@ -376,7 +376,6 @@ tensorboard --host 0.0.0.0 --port {your port} --logdir {lightning log path}
 
 Then visit `{server IP}:{your port}` in a browser.
 
-
 ## 7. Load trained weights
 
 ### 7.1 `pl.LightningModule`
