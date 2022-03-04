@@ -304,16 +304,14 @@ In both your `local` and `remote` project folders, run the following command to 
 
 ```bash
 cd ~/Projects/DLCVLecture
-git fetch
-git reset --hard origin/master
+git fetch && git reset --hard origin/master
 ```
 
 If you want to overwrite a specific file:
 
 ```bash
 cd ~/Projects/DLCVLecture
-git fetch
-git checkout origin/master {relative path} #  eg. git checkout origin/master Readme.md
+git fetch && git checkout origin/master {relative path} #  eg. git checkout origin/master Readme.md
 ```
 
 ## 5. MLflow
