@@ -353,7 +353,7 @@ mlflow run . --no-conda --experiment-name MNIST
 
 The `--no-conda` flag is to avoid creating `dlcvl` environment repeatedly.
 
-According to the `MLproject` file, we can set `max_epochs` and `batch_size`:
+According to the `MLproject` file, we can set `max_epochs` and `batch_size` like:
 
 ```bash
 mlflow run . --no-conda --experiment-name MNIST -P max_epochs=5 -P batch_size=128  
