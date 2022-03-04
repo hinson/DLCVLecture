@@ -12,9 +12,12 @@ class MNISTClassifier(pl.LightningModule):
         super(MNISTClassifier, self).__init__()
 
         self.save_hyperparameters(
-            "feat_out1", "feat_out2",
-            "feat_out3", "clf_hid",
-            "feat_lr", "clf_lr",
+            "feat_out1",
+            "feat_out2",
+            "feat_out3",
+            "clf_hid",
+            "feat_lr",
+            "clf_lr",
             "batch_size")
 
         self.args = kwargs
@@ -51,16 +54,24 @@ class MNISTClassifier(pl.LightningModule):
 
         for i, size in enumerate([8, 16, 8], 1):
             group.add_argument(
-                f"--feat_out{i}", type=int, default=size, metavar="N",
+                f"--feat_out{i}",
+                type=int,
+                default=size,
+                metavar="N",
                 help=f"output channel size for feature layer {i} (default: {size})")
 
         group.add_argument(
-            "--clf_hid", type=int, default=32, metavar="N",
+            "--clf_hid",
+            type=int,
+            default=32,
+            metavar="N",
             help="hidden size for classifier layer (default: 32)")
 
         for layer, lr in [('feat', 1e-2), ('clf', 1e-3)]:
             group.add_argument(
-                f"--{layer}_lr", type=float, default=lr,
+                f"--{layer}_lr",
+                type=float,
+                default=lr,
                 metavar="LR",
                 help=f"learning rate (default: {lr})")
 
@@ -68,8 +79,10 @@ class MNISTClassifier(pl.LightningModule):
 
     def configure_optimizers(self):
         optimizer = optim.SGD([
-            {'params': self.feature.parameters(), 'lr': self.args["feat_lr"]},
-            {'params': self.classifier.parameters(), 'lr': self.args["clf_lr"]}
+            {'params': self.feature.parameters(),
+             'lr': self.args["feat_lr"]},
+            {'params': self.classifier.parameters(),
+             'lr': self.args["clf_lr"]}
         ], momentum=0.9)
 
         return optimizer
@@ -80,7 +93,7 @@ class MNISTClassifier(pl.LightningModule):
         return x
 
     def training_step(self, batch, batch_idx):
-        input, target = batch       # no .to(device) required
+        input, target = batch    # no .to(device) required
         output = self(input)
         loss = self.criterion(output, target)
 

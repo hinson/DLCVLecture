@@ -1,7 +1,9 @@
 from argparse import ArgumentParser
 import os
+import random
 
 import mlflow.pytorch
+import numpy as np
 import pytorch_lightning as pl
 from pytorch_lightning.callbacks import ModelCheckpoint
 import torch
@@ -18,18 +20,44 @@ def parse_args():
     
     dm_group = parser.add_argument_group("MNISTDataModule")
     dm_group.add_argument(
-        "--data_root", type=str, default="~/Datasets",
+        "--data_root", 
+        type=str, 
+        default="~/Datasets",
         metavar="PATH", help="MNIST root path")
     dm_group.add_argument(
-        "--batch_size", type=int, default=64, metavar="N",
+        "--batch_size", 
+        type=int, 
+        default=64,
+        metavar="N",
         help="input batch size for training (default: 64)")
     dm_group.add_argument(
-        "--val_batch_size", type=int, default=128, metavar="N",
+        "--val_batch_size", 
+        type=int, 
+        default=128,
+        metavar="N",
         help="input batch size for validation (default: 128)")
+    
+    parser.add_argument(
+        "--seed",
+        type=int,
+        default=777,
+        metavar="N",
+        help="random seed"
+    )
 
     args = parser.parse_args()
     return args
 
+
+def init_experiment(args):
+    """
+    For reproducibility, see https://pytorch.org/docs/stable/notes/randomness.html
+    """
+    torch.manual_seed(args.seed)
+    random.seed(args.seed)
+    np.random.seed(args.seed)
+    torch.use_deterministic_algorithms(True)
+    
 
 def train_evaluation(mlrun, args, hparams):
 
@@ -47,7 +75,9 @@ def train_evaluation(mlrun, args, hparams):
     )
     
     trainer = pl.Trainer.from_argparse_args(
-        args, default_root_dir=artifact_path, callbacks=[mcp_callback],
+        args, 
+        default_root_dir=artifact_path, 
+        callbacks=[mcp_callback],
         gpus=str(hash(os.getlogin()) % 4) if torch.cuda.is_available() else None
     )
     
@@ -64,6 +94,8 @@ def train_evaluation(mlrun, args, hparams):
 
 def main():
     args = parse_args()
+    init_experiment(args)
+    
     hparams = dict(args.__dict__)
     del hparams["data_root"]
     del hparams["val_batch_size"]

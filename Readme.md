@@ -10,11 +10,20 @@
       - [1.1.2. MacOS](#112-macos)
     - [1.2. Set up the local environment](#12-set-up-the-local-environment)
   - [2. Set up a remote development environment](#2-set-up-a-remote-development-environment)
+    - [2.1. First time](#21-first-time)
+    - [2.2 Afterwards (login to the remote project)](#22-afterwards-login-to-the-remote-project)
   - [3. Set up VSCode](#3-set-up-vscode)
     - [3.1. Open the workspace](#31-open-the-workspace)
     - [3.2. Test local Python](#32-test-local-python)
     - [3.3. Set up remote Jupyter](#33-set-up-remote-jupyter)
     - [3.4. Test remote Jupyter](#34-test-remote-jupyter)
+  - [4. Update project files from Github](#4-update-project-files-from-github)
+    - [4.1. Overwrite old files and add new files](#41-overwrite-old-files-and-add-new-files)
+  - [5. MLflow](#5-mlflow)
+    - [5.1. Launch MLflow UI](#51-launch-mlflow-ui)
+    - [5.2. Tracking URI](#52-tracking-uri)
+    - [5.3. Run experiments](#53-run-experiments)
+  - [6. Tensorboard](#6-tensorboard)
 
 
 ## 1. Set up a local development environment
@@ -151,6 +160,8 @@ Please trust the author😊
 
 ## 2. Set up a remote development environment
 
+### 2.1. First time
+
 1. Create your RSA key pair from an adminstrator PowerShell in Windows or Terminal in MacOS
 
 ```bash
@@ -241,7 +252,16 @@ http://{server IP}:{your port}/?token={your token}
 Open this url in your browser.
 `{your token}` will change every time you lanch jupyter.
 
-The above commands with `#` are required every time you re-login to the remote server.
+
+### 2.2 Afterwards (login to the remote project)
+
+The above commands with `#` are required every time you re-login to the remote server. Summarize as
+
+```bash
+ssh {username}@{server IP} 
+cd ~/Projects/DLCVLecture
+conda activate dlcvl
+```
 
 ## 3. Set up VSCode
 
@@ -275,3 +295,83 @@ See [this](https://code.visualstudio.com/docs/datascience/jupyter-notebooks) for
 4. Click the right Play button or use `shift` + `enter` to execute the code in the first cell.
 
 If you want to close remote Jupyter, press `ctrl` + `c` in the remote session.
+
+## 4. Update project files from Github
+
+### 4.1. Overwrite old files and add new files
+
+In your `local` and `remote` project folders, run the following command to update the materials.
+
+```bash
+cd ~/Projects/DLCVLecture
+git fetch
+git reset --hard origin/master
+```
+
+If you want to overwrite a specific file:
+```bash
+cd ~/Projects/DLCVLecture
+git fetch
+git checkout origin/master {relative path} #  eg. git checkout origin/master Readme.md
+```
+
+## 5. MLflow
+
+
+### 5.1. Launch MLflow UI
+Follow [2.2](#22-afterwards-login-to-the-remote-project) to login to a remote server, then
+
+```bash
+cd python/example
+mlflow ui --backend-store-uri sqlite:///mlflow.db --port {your port}
+```
+
+There will be a new `sqlite` db file `mlflow.db` to store experimental data in `~/Projects/DLCVLecture/python/example`. If you want to use other databases, see [this](https://www.mlflow.org/docs/latest/tracking.html).
+
+Then visit `{server IP}:{your port}` in a browser.
+
+
+### 5.2. Tracking URI
+Open a new terminal and repeat [2.2](#22-afterwards-login-to-the-remote-project), then
+
+```bash
+export MLFLOW_TRACKING_URI=http://{server IP}:{your port}
+```
+
+If you do not export the above evironment variable, the following `mlflow` commands will use the default tracking URI `http://localhost:5000`
+
+### 5.3. Run experiments
+
+```bash
+cd python/example
+```
+
+- To run the default entry point `main`:
+
+```bash
+mlflow run . --no-conda --experiment-name MNIST   
+```
+
+The `--no-conda` flag is to avoid creating `dlcvl` environment repeatedly.
+
+According to the `MLproject` file, we can set `max_epochs` and `batch_size`:
+
+```bash
+mlflow run . --no-conda --experiment-name MNIST -P max_epochs=5 -P batch_size=128  
+```
+
+
+- To run the `grid search` entry point:
+
+```bash
+mlflow run . --no-conda --experiment-name MNIST_gs -e grid
+```
+
+
+## 6. Tensorboard
+
+```bash
+tensorboard --host 0.0.0.0 --port {your port} --logdir {lightning log path}
+```
+
+Then visit `{server IP}:{your port}` in a browser.
