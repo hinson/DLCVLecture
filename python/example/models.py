@@ -27,19 +27,19 @@ class MNISTClassifier(pl.LightningModule):
             nn.ReLU(True),
             nn.MaxPool2d(2, 2),
 
-            nn.LazyConv2d(kwargs["feat_out2"], 3),
+            nn.Conv2d(kwargs["feat_out1"], kwargs["feat_out2"], 3),
             nn.MaxPool2d(2, 2),
 
-            nn.LazyConv2d(kwargs["feat_out3"], 3),
+            nn.Conv2d(kwargs["feat_out2"], kwargs["feat_out3"], 3),
             nn.ReLU(True),
             nn.MaxPool2d(2, 2)
         )
 
         self.classifier = nn.Sequential(
             nn.Flatten(),
-            nn.LazyLinear(kwargs["clf_hid"]),
+            nn.Linear(kwargs["feat_out3"]*2*2, kwargs["clf_hid"]),
             nn.ReLU(True),
-            nn.LazyLinear(10)
+            nn.Linear(kwargs["clf_hid"], 10)
         )
 
         self.criterion = nn.CrossEntropyLoss()
