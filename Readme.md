@@ -395,8 +395,8 @@ For example, you can use the `CNN` class defined in `notebook/process` 3.1:
 
 ```python
 model = CNN()
-cp = torch.load({some pl. checkpoint path})
-model.load_state_dict(cp["state_dict"])
+ckpt = torch.load({some pl. checkpoint path})
+model.load_state_dict(ckpt["state_dict"])
 ```
 
 More about `state dict`, see [Saving and Loading Models (PyTorch)](https://pytorch.org/tutorials/beginner/saving_loading_models.html)

@@ -61,16 +61,16 @@ def make_reproducible(args):
     
 
 def train_evaluation(args, hparams, 
-                     default_root_dir=None, 
-                     mcp_dirpath=None, 
+                     log_dirpath=None, 
+                     ckpt_dirpath=None, 
                      log_samples=False):
 
     model = MNISTClassifier(**hparams)
     dm = MNISTDataModule(args.data_root, 
                          val_batch_size=args.val_batch_size, **hparams)
     
-    mcp_callback = ModelCheckpoint(
-        dirpath=mcp_dirpath+'/checkpoints',
+    ckpt_callback = ModelCheckpoint(
+        dirpath=ckpt_dirpath+'/checkpoints',
         filename='{epoch}-{val_loss:.4f}-{val_acc:.4f}',
         save_top_k=1, monitor="val_loss", mode="min",
         save_weights_only=True
@@ -78,8 +78,8 @@ def train_evaluation(args, hparams,
     
     trainer = pl.Trainer.from_argparse_args(
         args, 
-        default_root_dir=default_root_dir, 
-        callbacks=[mcp_callback],
+        default_root_dir=log_dirpath, 
+        callbacks=[ckpt_callback],
         gpus=str(hash(os.getlogin()) % 4) if torch.cuda.is_available() else None,
         strategy="dp"  # see https://pytorch-lightning.readthedocs.io/en/latest/common/trainer.html?highlight=strategy#strategy
     )
@@ -121,7 +121,7 @@ def main():
         artifact_path = run.info.artifact_uri
         train_evaluation(run, args, hparams,
                          default_root_dir=artifact_path,
-                         mcp_dirpath=artifact_path,
+                         ckpt_dirpath=artifact_path,
                          log_samples=True)
         
 
