@@ -61,7 +61,7 @@ def make_reproducible(args):
     
 
 def train_evaluation(args, hparams, 
-                     log_dir=None, 
+                     root_dir=None, 
                      ckpt_dir=None, 
                      log_samples=False):
 
@@ -78,7 +78,7 @@ def train_evaluation(args, hparams,
     
     trainer = pl.Trainer.from_argparse_args(
         args, 
-        default_root_dir=log_dir, 
+        default_root_dir=root_dir, 
         callbacks=[ckpt_callback],
         gpus=str(hash(os.getlogin()) % 4) if torch.cuda.is_available() else None,
         strategy="dp"  # see https://pytorch-lightning.readthedocs.io/en/latest/common/trainer.html?highlight=strategy#strategy
@@ -120,7 +120,7 @@ def main():
     with mlflow.start_run() as run:
         artifact_path = run.info.artifact_uri
         train_evaluation(run, args, hparams,
-                         log_dir=artifact_path,
+                         root_dir=artifact_path,
                          ckpt_dir=artifact_path,
                          log_samples=True)
         

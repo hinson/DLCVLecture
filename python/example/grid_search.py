@@ -24,7 +24,7 @@ def grid_search(args, hparam_grid):
 
                 hp_metric = train_evaluation(
                     child_run, args, hparams,
-                    log_dir=parent_artifact_path,
+                    root_dir=parent_artifact_path,
                     ckpt_dir=child_artifact_path)
 
                 # select the best hparams
