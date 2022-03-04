@@ -31,9 +31,11 @@ entry_points:
     #   python grid_search.py \
     #     --data_root ~/Datasets/ \
     #     --max_epochs {max_epochs} \
-    #     --seed {seed}
+    #     --seed {seed} \
+    #     --num_sanity_val_steps=0
     command: |
       python grid_search.py \
         --data_root '/data/ssd/torchvision/' \
         --max_epochs {max_epochs} \
-        --seed {seed}
+        --seed {seed} \
+        --num_sanity_val_steps=0
