@@ -106,7 +106,7 @@
 
     If your MacOS < 10.15, replace `.zprofile` with `.bash_profile`.
 
-5. Install VSCode and extensions.
+5. Install VSCode and extensions
 
     ```bash
     brew install --cask visual-studio-code
@@ -159,7 +159,7 @@
     code DLCVLecture.code-workspace
     ```
 
-    Please trust the author😊
+    Please trust the author 😊.
 
 ## 2. Set up a remote development environment
 
@@ -340,7 +340,7 @@ Open a new terminal and repeat [2.2](#22-afterwards-login-to-the-remote-project)
 export MLFLOW_TRACKING_URI=http://{server IP}:{your port}
 ```
 
-If you do not export the above evironment variable, the following `mlflow` commands will use the default tracking URI `http://localhost:5000`
+If you do not export the above evironment variable, the following `mlflow` commands will use the default tracking URI `http://localhost:5000`.
 
 ### 5.3. Run experiments
 
@@ -398,4 +398,4 @@ ckpt = torch.load({some pl. checkpoint path})
 model.load_state_dict(ckpt["state_dict"])
 ```
 
-More about `state dict`, see [Saving and Loading Models (PyTorch)](https://pytorch.org/tutorials/beginner/saving_loading_models.html)
+More about `state dict`, see [Saving and Loading Models (PyTorch)](https://pytorch.org/tutorials/beginner/saving_loading_models.html).
