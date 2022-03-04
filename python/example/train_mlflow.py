@@ -120,7 +120,7 @@ def main():
     with mlflow.start_run() as run:
         artifact_path = run.info.artifact_uri
         train_evaluation(run, args, hparams,
-                         default_root_dir=artifact_path,
+                         log_dirpath=artifact_path,
                          ckpt_dirpath=artifact_path,
                          log_samples=True)
         
