@@ -300,7 +300,7 @@ If you want to close remote Jupyter, press `ctrl` + `c` in the remote session.
 
 ### 4.1. Overwrite old files and add new files
 
-In your `local` and `remote` project folders, run the following command to update the materials.
+In both your `local` and `remote` project folders, run the following command to update the materials.
 
 ```bash
 cd ~/Projects/DLCVLecture
@@ -309,6 +309,7 @@ git reset --hard origin/master
 ```
 
 If you want to overwrite a specific file:
+
 ```bash
 cd ~/Projects/DLCVLecture
 git fetch
@@ -316,7 +317,6 @@ git checkout origin/master {relative path} #  eg. git checkout origin/master Rea
 ```
 
 ## 5. MLflow
-
 
 ### 5.1. Launch MLflow UI
 Follow [2.2](#22-afterwards-login-to-the-remote-project) to login to a remote server, then
