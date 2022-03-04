@@ -79,7 +79,8 @@ def train_evaluation(mlrun, args, hparams, log_samples=False):
         args, 
         default_root_dir=artifact_path, 
         callbacks=[mcp_callback],
-        gpus=str(hash(os.getlogin()) % 4) if torch.cuda.is_available() else None
+        gpus=str(hash(os.getlogin()) % 4) if torch.cuda.is_available() else None,
+        strategy='dp'
     )
     
     # inject mlflow auto logging
