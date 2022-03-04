@@ -89,12 +89,12 @@ def train_evaluation(mlrun, args, hparams, log_samples=False):
     
     trainer.fit(model, datamodule=dm)
     trainer.test(datamodule=dm)
-    test_acc = trainer.callback_metrics.get("test_acc")
+    hp_metric = trainer.callback_metrics.get("hp_metric")
     
     if log_samples:
         mlflow_log_samples(dm)
     
-    return float(test_acc)
+    return float(hp_metric)
 
 
 def mlflow_log_samples(dm):

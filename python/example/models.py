@@ -137,7 +137,8 @@ class MNISTClassifier(pl.LightningModule):
 
         correct = sum([x["num_correct"] for x in outputs])
         total = sum(x["num_samples"] for x in outputs)
-        self.log("val_acc", correct / total)
+        acc = correct / total
+        self.log("val_acc", acc)
 
     def test_step(self, batch, batch_idx):
         input, target = batch
@@ -151,4 +152,6 @@ class MNISTClassifier(pl.LightningModule):
     def test_epoch_end(self, outputs):
         correct = sum(x["num_correct"] for x in outputs)
         total = sum(x["num_samples"] for x in outputs)
-        self.log("test_acc", correct / total)
+        acc = correct / total
+        self.log("test_acc", acc)
+        self.log("hp_metric", acc)

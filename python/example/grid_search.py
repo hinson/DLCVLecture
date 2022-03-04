@@ -19,11 +19,11 @@ def grid_search(args, hparam_grid):
         for i, hparams in enumerate(hparam_groups):
             with mlflow.start_run(nested=True, run_name=f"Trial {i}") as child_run:
 
-                test_acc = train_evaluation(child_run, args, hparams)
+                hp_metric = train_evaluation(child_run, args, hparams)
 
                 # select the best hparams
-                if test_acc > best_metric:
-                    best_metric = test_acc
+                if hp_metric > best_metric:
+                    best_metric = hp_metric
                     best_hparams = hparams
 
         mlflow.log_metric("best_metric", best_metric)
