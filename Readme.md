@@ -11,7 +11,7 @@
     - [1.2. Set up the local environment](#12-set-up-the-local-environment)
   - [2. Set up a remote development environment](#2-set-up-a-remote-development-environment)
     - [2.1. First time](#21-first-time)
-    - [2.2 Afterwards (login to the remote project)](#22-afterwards-login-to-the-remote-project)
+    - [2.2. Afterwards (login to the remote project)](#22-afterwards-login-to-the-remote-project)
   - [3. Set up VSCode](#3-set-up-vscode)
     - [3.1. Open the workspace](#31-open-the-workspace)
     - [3.2. Test local Python](#32-test-local-python)
@@ -256,7 +256,7 @@
     Open this url in your browser.
     `{your token}` will change every time you lanch jupyter.
 
-### 2.2 Afterwards (login to the remote project)
+### 2.2. Afterwards (login to the remote project)
 
 The above commands with `#` are required every time you re-login to the remote server. Summarize as
 
